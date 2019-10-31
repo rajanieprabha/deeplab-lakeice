@@ -13,16 +13,5 @@
 # Beware of some common bugs.
 
 # References
-@inproceedings{deeplabv3plus2018,
-  title={Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation},
-  author={Liang-Chieh Chen and Yukun Zhu and George Papandreou and Florian Schroff and Hartwig Adam},
-  booktitle={ECCV},
-  year={2018}
-}
-
-@misc{labelme2016,
-  author =       {Ketaro Wada},
-  title =        {{labelme: Image Polygonal Annotation with Python}},
-  howpublished = {\url{https://github.com/wkentaro/labelme}},
-  year =         {2016}
-}
+1. Chen Liang-Chieh et. al 2018, Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation, ECCV.
+2. Wad Ketaro 2016, labelme: Image Polygonal Annotation with Python, \url{https://github.com/wkentaro/labelme}
