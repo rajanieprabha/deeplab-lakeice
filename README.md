@@ -13,5 +13,6 @@
 # Beware of some common bugs.
 
 # References
-1. Chen Liang-Chieh et. al 2018, Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation, ECCV.
-2. Wad Ketaro 2016, labelme: Image Polygonal Annotation with Python, \url{https://github.com/wkentaro/labelme}
+1. Chen Liang-Chieh et. al 2018, Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation, ECCV. https://github.com/tensorflow/models/tree/master/research/deeplab
+    
+2. Wad Ketaro 2016, labelme: Image Polygonal Annotation with Python. https://github.com/wkentaro/labelme
