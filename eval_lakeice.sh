@@ -31,35 +31,6 @@ NUM_ITERATIONS=100000
 ##  Comments on changes done
 ## --model_variant="xception_skips" if you want to use the model with skips from encoder to decoder, "xception_65 otherwise
 ## --skips=1 if you want 4 extra skip concat layers from encoder to decoder, 0 otherwise
-## check model.py file //not skips parameter is not working yet
-
-python3 "${WORK_DIR}"/train.py \
-  --logtostderr \
-  --train_split="val" \
-  --model_variant="xception_65_skips" \
-  --skips=1 \
-  --atrous_rates=6 \
-  --atrous_rates=12 \
-  --atrous_rates=18 \
-  --output_stride=16 \
-  --decoder_output_stride=4 \
-  --train_crop_size="321,321" \
-  --dataset="lake" \
-  --train_batch_size=8 \
-  --training_number_of_steps="${NUM_ITERATIONS}" \
-  --fine_tune_batch_norm=false \
-  --train_logdir="${TRAIN_LOGDIR}" \
-  --base_learning_rate=0.0001 \
-  --learning_policy="poly" \
-  --tf_initial_checkpoint="/home/pf/pfshare/data/MA_Rajanie/models/research/deeplab/datasets/lake/init_models/deeplabv3_pascal_train_aug/model.ckpt" \
-  --dataset_dir="${LAKEICE_DATASET}"
-
-#  --tf_initial_checkpoint="/home/pf/pfshare/data/MA_Rajanie/models/research/deeplab/datasets/lake/init_models/deeplabv3_pascal_train_aug/model.ckpt" \
-# /home/pf/pfshare/data/MA_Rajanie/models/research/deeplab/datasets/lake/exp/Train_Cam1_val_Cam0_weighted/train/model.ckpt-30000" \
-#   --skips=1 \
-#   --tf_initial_checkpoint="/home/pf/pfshare/data/MA_Rajanie/resnet_v1_101/model.ckpt" \
-#     --top_k_percent_pixels=1.0 \
-# --hard_example_mining_step=0 \
 
  
 python3 "${WORK_DIR}"/eval.py \

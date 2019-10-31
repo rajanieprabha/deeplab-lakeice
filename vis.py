@@ -178,17 +178,17 @@ def _process_batch(sess, original_images, semantic_predictions, image_names,
     save_annotation.save_annotation(
         original_image, save_dir, "%s_image" % (image_names[i]) ,
         add_colormap=False)
-
-  
+	
+	
+    # Uncomment if you want to save logits along with visualization examples
     #path = FLAGS.logits_file+"/"+ str(image_names[i])
     #np.save(path,logits)
     #print("logits saved")
   
-    #Save ground truth
+    #Save ground truth in the vis/segmentation_results folder
     # gt_dir = "/home/pf/pfshare/data/MA_Rajanie/models/research/deeplab/datasets/lake/SegmentationClassPNG"
     # gt = str(image_names[i]).replace("b", "").replace("'", "")+".png"
     # if gt in gt_dir:
-    #     print("fhbvuj")
     #     shutil.copy(file, save_dir)
 
 

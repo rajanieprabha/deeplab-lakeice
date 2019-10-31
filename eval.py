@@ -91,7 +91,7 @@ flags.DEFINE_integer('max_number_of_evaluations', 0,
                      'indefinitely upon nonpositive values.')
 
 flags.DEFINE_integer('skips', 0,
-                     'Do you want extra skips layers from encoder to decoder')
+                     'Do you want extra skips layers from encoder to decoder? 0 for no and 1 for yes')
 
 
 def main(unused_argv):
@@ -164,15 +164,7 @@ def main(unused_argv):
     predictions = tf.reshape(predictions, shape=[-1])
     labels = tf.reshape(samples[common.LABEL], shape=[-1])
     weights = tf.to_float(tf.not_equal(labels, dataset.ignore_label))
-    
-
-    # weights = tf.to_float(tf.equal(labels, 0)) * 1 + \
-    #           tf.to_float(tf.equal(labels, 1)) * 1 + \
-    #           tf.to_float(tf.equal(labels, 2)) * 1 + \
-    #           tf.to_float(tf.equal(labels, 3)) * 1 + \
-    #           tf.to_float(tf.equal(labels, 4)) * 10 + \
-    #           tf.to_float(tf.equal(labels, dataset.ignore_label)) * 0.0    
-
+ 
     # Set ignore_label regions to label 0, because metrics.mean_iou requires
     # range of labels = [0, dataset.num_classes). Note the ignore_label regions
     # are not evaluated since the corresponding regions contain weights = 0.
@@ -190,7 +182,7 @@ def main(unused_argv):
 
     metric_map = {}
 
-      # inserted to combat some error
+    # to remove "predictions out of bound error"
     indices = tf.squeeze(tf.where(tf.less_equal(
         labels, dataset.num_of_classes - 1)), 1)
     labels_ind = tf.cast(tf.gather(labels, indices), tf.int32)
@@ -201,25 +193,14 @@ def main(unused_argv):
         labels_ind, predictions_ind,  dataset.num_of_classes, weights=weights, name="mean_iou")
     tf.summary.scalar(predictions_tag, miou)
 
-    # Define the evaluation metric IOU for individual classes block starts
+    # Define the evaluation metric IOU for individual classes
     iou_v, update_op = my_metrics.iou(
         labels_ind, predictions_ind, dataset.num_of_classes, weights=weights)
     for index in range(0, dataset.num_of_classes):
         metric_map['class_' + str(index) + '_iou'] = (iou_v[index], update_op[index])
         tf.summary.scalar('class_' + str(index) + '_iou', iou_v[index])
 
-    ##auc curve
-    
-    # points, update_roc = tf.contrib.metrics.streaming_curve_points(labels=labels_ind, predictions=tf.reshape(logits, shape=[-1]),
-    #                       weights=None, curve='ROC')
-    # tf.summary.scalar("ROC_curve", points)
-
-
-    ##
-
-    #total_cm, update_cm =  _streaming_confusion_matrix(predictions_ind, labels_ind, num_classes=dataset.num_of_classes, weights=weights)
-    #total_cm = tf.confusion_matrix(labels,predictions,num_classes=5,weights=None)
-    #confusion = tf.Variable( tf.zeros([5,5], dtype=tf.int32 ), name='confusion' )
+    # Confusion matrix save hook. It updates the confusion matrix on tensorboard at the end of eval loop.
     confusionMatrixSaveHook = confusion_matrix.SaverHook(
         labels=['BG', 'water', 'ice', 'snow', 'clutter' ],
         confusion_matrix_tensor_name='mean_iou/total_confusion_matrix',
@@ -232,14 +213,6 @@ def main(unused_argv):
     summary_hook = tf.contrib.training.SummaryAtEndHook(
         log_dir=FLAGS.eval_logdir, summary_op=summary_op)
     hooks = [summary_hook, confusionMatrixSaveHook]
-
-    # num_batches = int(
-    #     math.ceil(len(samples) / float(FLAGS.eval_batch_size)))
-
-
-    # tf.logging.info('Eval num images %d', len(samples))
-    # tf.logging.info('Eval batch size %d and num batch %d',
-    #                 FLAGS.eval_batch_size, num_batches)
 
 
     num_eval_iters = None

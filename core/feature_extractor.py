@@ -86,10 +86,12 @@ networks_map = {
     'xception_65_skips': xception.xception_65,
     'xception_71': xception.xception_71,
     'nas_pnasnet': nas_network.pnasnet,
+    3
     'nas_hnasnet': nas_network.hnasnet,
 }
 
 # A map from network name to network arg scope.
+# Use xception_65_skips if you want to use deep-U-lab with extra skips from encoder to decoder
 arg_scopes_map = {
     'mobilenet_v2': mobilenet_v2.training_scope,
     'resnet_v1_50': resnet_utils.resnet_arg_scope,

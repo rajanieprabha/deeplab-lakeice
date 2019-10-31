@@ -10,7 +10,7 @@ else:
     print('Usage: python count_ckpt_param.py path-to-ckpt')
     sys.exit(1)
 
-# Open TensorFlow ckpt
+# Open TensorFlow ckpt and count the number of trainable parameters in the model
 reader = tf.train.NewCheckpointReader(ckpt_fpath)
 
 print('\nCount the number of parameters in ckpt file(%s)' % ckpt_fpath)

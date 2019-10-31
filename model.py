@@ -676,6 +676,7 @@ def refine_by_decoder(features,
             else:
               feature_name = '{}/{}'.format(
                   feature_extractor.name_scope[model_variant], name)
+            #Keep skips=1 if you want to use xception_65_skips model otherwise keep skips=0
             skips = 1
             if skips==1:
                 #print(skips)
