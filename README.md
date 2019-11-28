@@ -31,6 +31,15 @@ For parameters: the specified values were used for all experiments.
    --learning_policy="poly"        
    --tf_initial_checkpoint="/home/pf/pfshare/data/MA_Rajanie/pretrained/deeplabv3_pascal_trainval/model.ckpt"       
    --dataset_dir="${LAKEICE_DATASET}"     
+   
+
+For evaluation and visualization, run the eval_lakeice.sh script.  
+  
+   --eval_split="val"             -> Split should be "val", instead of "train"
+   --model_variant="xception_65"  -> Same rules as train script
+   --skips=0    
+   --eval_crop_size="325,1210"    -> Full image eval_crop_size   
+   --max_number_of_evaluations=1  -> If set to 1, evaluation script will run once and exit. If >1, it will keep checking the train logdir for new checkpoints. Useful, when running both train and eval scripts simultaneously (alloting part of GPU to both).    
 
 ## Results and Visualisations.
 
