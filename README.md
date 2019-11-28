@@ -35,7 +35,7 @@ For parameters: the specified values were used for all experiments.
 
 For evaluation and visualization, run the eval_lakeice.sh script.  
   
-   --eval_split="val"             -> Split should be "val", instead of "train"
+   --eval_split="val"             -> Split should be "val", instead of "train"     
    --model_variant="xception_65"  -> Same rules as train script
    --skips=0    
    --eval_crop_size="325,1210"    -> Full image eval_crop_size   
