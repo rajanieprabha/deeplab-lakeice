@@ -35,7 +35,7 @@ cp /home/pf/pfshare/data/MA_Rajanie/models/research/deeplab/eval.py ${TRAIN_LOGD
 
 python3 "${WORK_DIR}"/train.py \
   --logtostderr \
-  --train_split="val" \
+  --train_split="train" \
   --model_variant="xception_65" \
   --skips=0 \
   --atrous_rates=6 \
