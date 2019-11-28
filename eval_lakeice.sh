@@ -13,10 +13,12 @@ INIT_FOLDER="${WORK_DIR}/${DATASET_DIR}/${LAKEICE_FOLDER}/init_models"
 TRAIN_LOGDIR="${WORK_DIR}/${DATASET_DIR}/${LAKEICE_FOLDER}/${EXP_FOLDER}/train"
 EVAL_LOGDIR="${WORK_DIR}/${DATASET_DIR}/${LAKEICE_FOLDER}/${EXP_FOLDER}/eval"
 VIS_LOGDIR="${WORK_DIR}/${DATASET_DIR}/${LAKEICE_FOLDER}/${EXP_FOLDER}/vis"
+LOGITS_LOGDIR="${WORK_DIR}/${DATASET_DIR}/${LAKEICE_FOLDER}/${EXP_FOLDER}/logits"
 
 #mkdir -p "${WORK_DIR}/${DATASET_DIR}/${LAKEICE_FOLDER}/exp"
 mkdir -p "${EVAL_LOGDIR}"
 mkdir -p "${VIS_LOGDIR}"
+mkdir -p "${LOGITS_LOGDIR}"
 
 LAKEICE_DATASET="${WORK_DIR}/${DATASET_DIR}/${LAKEICE_FOLDER}/ptz_cam1_resized_324x1209_tfrecord"
 
@@ -46,7 +48,7 @@ python3 "${WORK_DIR}"/eval.py \
   --eval_crop_size="325,1210" \
   --dataset="lake" \
   --checkpoint_dir="${TRAIN_LOGDIR}" \
-  --eval_logdir="/home/pf/pfshare/data/MA_Rajanie/models/research/deeplab/datasets/lake/exp/ptz_downsampled_cam1/Test/ptz_cam0/eval" \
+  --eval_logdir="${EVAL_LOGDIR}" \
   --dataset_dir="${LAKEICE_DATASET}" \
   --max_number_of_evaluations=1
 
@@ -64,8 +66,8 @@ python3 "${WORK_DIR}"/vis.py \
   --decoder_output_stride=4 \
   --vis_crop_size="325,1210"  \
   --checkpoint_dir="${TRAIN_LOGDIR}" \
-  --vis_logdir="/home/pf/pfshare/data/MA_Rajanie/models/research/deeplab/datasets/lake/exp/ptz_downsampled_cam1/Test/ptz_cam0/vis" \
-  --logits_file="/home/pf/pfshare/data/MA_Rajanie/models/research/deeplab/datasets/lake/exp/ptz_downsampled_cam1/Test/ptz_cam0/logits" \
+  --vis_logdir="${EVAL_LOGDIR}" \
+  --logits_file="${LOGITS_LOGDIR}" \
   --dataset="lake" \
   --dataset_dir="${LAKEICE_DATASET}" \
   --colormap_type="lake" \
