@@ -11,6 +11,26 @@
 5. Jupyter Notebook for inference using a saved tensorflow checkpoint.
 
 ## Steps to reproduce the experiment.
+By simply running the train_lakeice.sh, the training will start.
+For parameters: the specified values were used for all experiments.
+1. Setup up the tensorflow records in LAKEICE_DATASET parameter.
+2. --model_variant="xception_65" -> Change to "xception_65_skips" to use Deep-U-Lab
+   --skips=0                     -> Change to 1, if using "xception_65_skips"
+   --atrous_rates=6 
+   --atrous_rates=12 
+   --atrous_rates=18 
+   --output_stride=16 
+   --decoder_output_stride=4 
+   --train_crop_size="321,321"   -> Used 512,512 for lake-detection and 321,321 for lake-ice segmentation
+   --dataset="lake"             
+   --train_batch_size=8          -> Set according to GPU availability. This should be >=16 for tuning the batch norm layers
+   --training_number_of_steps="${NUM_ITERATIONS}" 
+   --fine_tune_batch_norm=false  -> Set to "true" if train_batch_size>=16
+   --train_logdir="${TRAIN_LOGDIR}" 
+   --base_learning_rate=0.0001 
+   --learning_policy="poly" 
+   --tf_initial_checkpoint="/home/pf/pfshare/data/MA_Rajanie/pretrained/deeplabv3_pascal_trainval/model.ckpt" 
+   --dataset_dir="${LAKEICE_DATASET}"
 
 ## Results and Visualisations.
 
