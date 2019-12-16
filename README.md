@@ -12,12 +12,12 @@
 
 ## Steps to reproduce the experiment.
 
-# Data
+Data
 Folder structure:
   ```bash
 ├── datasets
     ├── lake
-        ├── JPEGImages
+        ├── JPEGImages
         ├── SegmentationClassPNG
         ├── SegmentationClassRaw
         ├── Imagesets
