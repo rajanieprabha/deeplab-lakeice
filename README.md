@@ -11,6 +11,30 @@
 5. Jupyter Notebook for inference using a saved tensorflow checkpoint.
 
 ## Steps to reproduce the experiment.
+
+# Data
+Folder structure:
+  ```bash
+├── datasets
+    ├── lake
+        ├── JPEGImages
+        ├── SegmentationClassPNG
+        ├── SegmentationClassRaw
+        ├── Imagesets
+            ├── train.txt
+            ├── val.txt
+        ├── abc.tfrecord
+
+```
+-> Place the Images in JPEGImages and segmentation color masks in SegmentationClassPNG. Run remove_gt_colormap_lakeice.py to covert the RGB color codes to class number, i.e. 0 for Background, 1 for Water, 2 for Ice, and so on. Take care of paths label_dir (SegmentationClassPNG directory) and new_label_dir (SegmentationClassRaw directory).
+-> Create a folder Imagesets which contains the train.txt (training image sample names) and val.txt (testing image sample names) files. 
+-> Now, Convert data into tensorflow record by running bash script download_and_convert_lakeice.sh (Take care of the directory paths in the script).
+
+Voila, now you have the dataset to train your model.
+
+
+
+
 By simply running the train_lakeice.sh, the training will start.
 For parameters: the specified values were used for all experiments.
 1. Setup up the tensorflow records in LAKEICE_DATASET parameter.
