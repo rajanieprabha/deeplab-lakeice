@@ -1,6 +1,6 @@
 # Lake-Ice monitoring of Alpine lakes using webcam Images and crowdsourced data.
 
-## What this repo contains?
+## What does this repo contain?
 1. Deeplab v3 plus tensorflow model adopted from official tensorflow repository with some changes.    
   (a). Code for calculating Individual class IOU.     
   (b). Code for checking confusion matrix on tensorboard.     
